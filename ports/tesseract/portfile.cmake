@@ -8,10 +8,11 @@ vcpkg_from_github(
     REF 4.1.0
     SHA512 d617f5c5b826640b2871dbe3d7973bcc5e66fafd837921a20e009d683806ed50f0f258aa455019d99fc54f5cb65c2fa0380e3a3c92b39ab0684b8799c730b09d
     PATCHES
-        fix-tiff-linkage.patch
+ #       fix-tiff-linkage.patch
 		fix-text2image.patch
 )
 
+file(COPY ${CMAKE_CURRENT_LIST_DIR}/CMakeLists.txt DESTINATION ${SOURCE_PATH})
 # The built-in cmake FindICU is better
 file(REMOVE ${SOURCE_PATH}/cmake/FindICU.cmake)
 
