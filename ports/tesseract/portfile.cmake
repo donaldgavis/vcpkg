@@ -32,7 +32,11 @@ if("independed_architecture" IN_LIST FEATURES)
 else()
     list(APPEND OPTIONS_LIST -DTARGET_ARCHITECTURE=auto)
 endif()
-
+if("libarchive" IN_LIST FEATURES)
+    list(APPEND OPTIONS_LIST -DBUILD_LIBARCHIVE=ON)
+else()
+    list(APPEND OPTIONS_LIST -DBUILD_LIBARCHIVE=OFF)
+endif()
 vcpkg_configure_cmake(
     SOURCE_PATH ${SOURCE_PATH}
     PREFER_NINJA
