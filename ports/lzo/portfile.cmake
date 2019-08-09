@@ -47,7 +47,7 @@ if(VCPKG_LIBRARY_LINKAGE STREQUAL dynamic)
     file(WRITE ${CURRENT_PACKAGES_DIR}/include/lzo/lzoconf.h "${LZO_CONFIG}")
 endif()
 
-file(COPY ${SOURCE_PATH}/src/cmake/modules/FindLZO.cmake DESTINATION ${CURRENT_PACKAGES_DIR}/share/${PORT})
+file(COPY ${CMAKE_CURRENT_LIST_DIR}/FindLZO.cmake DESTINATION ${CURRENT_PACKAGES_DIR}/share/${PORT})
 file(COPY ${CMAKE_CURRENT_LIST_DIR}/vcpkg-cmake-wrapper.cmake DESTINATION ${CURRENT_PACKAGES_DIR}/share/${PORT})
 
 # Handle copyright
