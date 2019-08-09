@@ -292,13 +292,13 @@ add_definitions(-D_SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS=1)
 
 include_directories(${Leptonica_INCLUDE_DIRS})
 
-if(HAVE_LIBARCHIVE)
-    include_directories(${BZIP2_INCLUDE_DIR})
-    include_directories(${LZ4_INCLUDE_DIR})
-    include_directories(${LIBXML2_INCLUDE_DIRS})
-    include_directories(${LZO_INCLUDE_DIR})
-    include_directories(${OPENSSL_INCLUDE_DIR})
-    include_directories(${LibArchive_INCLUDE_DIRS})
+#if(HAVE_LIBARCHIVE)
+include_directories(${BZIP2_INCLUDE_DIR})
+include_directories(${LZ4_INCLUDE_DIR})
+include_directories(${LIBXML2_INCLUDE_DIRS})
+include_directories(${LZO_INCLUDE_DIR})
+include_directories(${OPENSSL_INCLUDE_DIR})
+include_directories(${LibArchive_INCLUDE_DIRS})
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
@@ -420,20 +420,20 @@ if (CPPAN_BUILD)
     file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/TesseractTargets.cmake "include(${CMAKE_CURRENT_BINARY_DIR}/cppan.cmake)\n")
     export(TARGETS libtesseract APPEND FILE ${CMAKE_CURRENT_BINARY_DIR}/TesseractTargets.cmake)
 else()
-    if(HAVE_LIBARCHIVE)
-        target_link_libraries       (libtesseract PUBLIC
-        ${Leptonica_LIBRARIES}
-        ${LibArchive_LIBRARIES}
-        ${BZIP2_LIBRARY}
-        lz4::lz4
-        ${LIBXML2_LIBRARIES} 
-        OpenSSL::SSL
-        ${LZO_LIBRARY}
-        )
-    else()
-        target_link_libraries       (libtesseract PUBLIC
-        ${Leptonica_LIBRARIES}
-        )
+    # if(HAVE_LIBARCHIVE)
+    target_link_libraries       (libtesseract PUBLIC
+    ${Leptonica_LIBRARIES}
+    ${LibArchive_LIBRARIES}
+    ${BZIP2_LIBRARY}
+    lz4::lz4
+    ${LIBXML2_LIBRARIES} 
+    OpenSSL::SSL
+    ${LZO_LIBRARY}
+    )
+    # else()
+        # target_link_libraries       (libtesseract PUBLIC
+        # ${Leptonica_LIBRARIES}
+        # )
     export(TARGETS libtesseract FILE ${CMAKE_CURRENT_BINARY_DIR}/TesseractTargets.cmake)
 endif()
 
