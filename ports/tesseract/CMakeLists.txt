@@ -171,13 +171,11 @@ else()
 endif()
 
 find_package(OpenCL QUIET)
+
 find_package(BZip2 REQUIRED)
-
 find_path(LZ4_INCLUDE_DIR lz4.h)
-
-find_library(LZ4_LIBRARY_DEBUG NAMES lz4d)
-find_library(LZ4_LIBRARY_RELEASE NAMES lz4)
-
+# find_library(LZ4_LIBRARY_DEBUG NAMES lz4d)
+# find_library(LZ4_LIBRARY_RELEASE NAMES lz4)
 find_package(LibXml2 REQUIRED)
 find_package(OpenSSL REQUIRED)
 
@@ -424,7 +422,6 @@ else()
         ${Leptonica_LIBRARIES}
         ${LibArchive_LIBRARIES}
         ${BZIP2_LIBRARY}
-        ${LZ4_LIBRARY}
         ${LIBXML2_LIBRARIES} 
         OpenSSL::SSL
     )
