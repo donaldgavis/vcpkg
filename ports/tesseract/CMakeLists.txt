@@ -172,17 +172,15 @@ endif()
 
 find_package(OpenCL QUIET)
 
-find_package(BZip2 REQUIRED)
-find_path(LZ4_INCLUDE_DIR lz4.h)
-# find_library(LZ4_LIBRARY_DEBUG NAMES lz4d)
-# find_library(LZ4_LIBRARY_RELEASE NAMES lz4)
-find_package(LibXml2 REQUIRED)
-find_package(OpenSSL REQUIRED)
-
-
 find_package(LibArchive)
 if(LibArchive_FOUND)
-    set(HAVE_LIBARCHIVE ON)
+    set(HAVE_LIBARCHIVE ON) 
+    find_package(BZip2 REQUIRED)
+#    find_path(LZ4_INCLUDE_DIR lz4.h)
+    find_package(lz4 CONFIG REQUIRED)
+    find_package(LibXml2 REQUIRED)
+    find_package(OpenSSL REQUIRED)
+    find_package(LZO REQUIRED)
 endif()
 
 
@@ -293,10 +291,14 @@ include(SourceGroups)
 add_definitions(-D_SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS=1)
 
 include_directories(${Leptonica_INCLUDE_DIRS})
-include_directories(${BZIP2_INCLUDE_DIR})
-include_directories(${LZ4_INCLUDE_DIR})
-include_directories(${LIBXML2_INCLUDE_DIRS})
-include_directories(${LibArchive_INCLUDE_DIRS})
+
+if(HAVE_LIBARCHIVE)
+    include_directories(${BZIP2_INCLUDE_DIR})
+    include_directories(${LZ4_INCLUDE_DIR})
+    include_directories(${LIBXML2_INCLUDE_DIRS})
+    include_directories(${LZO_INCLUDE_DIR})
+    include_directories(${OPENSSL_INCLUDE_DIR})
+    include_directories(${LibArchive_INCLUDE_DIRS})
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
@@ -418,13 +420,20 @@ if (CPPAN_BUILD)
     file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/TesseractTargets.cmake "include(${CMAKE_CURRENT_BINARY_DIR}/cppan.cmake)\n")
     export(TARGETS libtesseract APPEND FILE ${CMAKE_CURRENT_BINARY_DIR}/TesseractTargets.cmake)
 else()
-    target_link_libraries       (libtesseract PUBLIC
+    if(HAVE_LIBARCHIVE)
+        target_link_libraries       (libtesseract PUBLIC
         ${Leptonica_LIBRARIES}
         ${LibArchive_LIBRARIES}
         ${BZIP2_LIBRARY}
+        lz4::lz4
         ${LIBXML2_LIBRARIES} 
         OpenSSL::SSL
-    )
+        ${LZO_LIBRARY}
+        )
+    else()
+        target_link_libraries       (libtesseract PUBLIC
+        ${Leptonica_LIBRARIES}
+        )
     export(TARGETS libtesseract FILE ${CMAKE_CURRENT_BINARY_DIR}/TesseractTargets.cmake)
 endif()
 
