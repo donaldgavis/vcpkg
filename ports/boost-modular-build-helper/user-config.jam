@@ -39,14 +39,14 @@ project user-config : ;
 
 lib advapi32 ;
 
-lib icuuc : : <file>"@CURRENT_INSTALLED_DIR@/lib/icuuc.lib" <variant>release : : <library>advapi32 ;
-lib icuuc : : <file>"@CURRENT_INSTALLED_DIR@/debug/lib/icuucd.lib" <variant>debug : : <library>advapi32 ;
+lib icuuc : : <file>"@CURRENT_INSTALLED_DIR@/lib/@ICUUC_LIB@@ICU_LIB_RELEASE_SUFFIX@" <variant>release : : <library>advapi32 ;
+lib icuuc : : <file>"@CURRENT_INSTALLED_DIR@/debug/lib/@ICUUC_LIB@@ICU_LIB_DEBUG_SUFFIX@" <variant>debug : : <library>advapi32 ;
 
-lib icuin : : <file>"@CURRENT_INSTALLED_DIR@/lib/icuin.lib" <variant>release : : ;
-lib icuin : : <file>"@CURRENT_INSTALLED_DIR@/debug/lib/icuind.lib" <variant>debug : : ;
+lib icuin : : <file>"@CURRENT_INSTALLED_DIR@/lib/@ICUIN_LIB@@ICU_LIB_RELEASE_SUFFIX@" <variant>release : : ;
+lib icuin : : <file>"@CURRENT_INSTALLED_DIR@/debug/lib/@ICUIN_LIB@@ICU_LIB_DEBUG_SUFFIX@" <variant>debug : : ;
 
-lib icudt : : <file>"@CURRENT_INSTALLED_DIR@/lib/icudt.lib" <variant>release : : ;
-lib icudt : : <file>"@CURRENT_INSTALLED_DIR@/debug/lib/icudtd.lib" <variant>debug : : ;
+lib icudt : : <file>"@CURRENT_INSTALLED_DIR@/lib/@ICUDT_LIB@@ICU_LIB_RELEASE_SUFFIX@" <variant>release : : ;
+lib icudt : : <file>"@CURRENT_INSTALLED_DIR@/debug/lib/@ICUDT_LIB@@ICU_LIB_DEBUG_SUFFIX@" <variant>debug : : ;
 
 lib iconv : : <file>"@LIBICONV_LIBRARY@" <link>shared <runtime-link>shared <variant>release : : ;
 lib iconv : : <file>"@LIBICONV_LIBRARY@" <link>shared <runtime-link>shared <variant>debug : : ;
