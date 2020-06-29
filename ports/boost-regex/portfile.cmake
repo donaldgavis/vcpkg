@@ -6,6 +6,8 @@ vcpkg_from_github(
     REF boost-1.73.0
     SHA512 4ff9559b925a4901bc98762ed0fa21fe19f27bdf3c49932285bac830d52ddcb0d3e3d3197581b655bc0ed720916d9d2242ace4567cc4d457d0eafdd822114418
     HEAD_REF master
+    PATCHES
+        fix-boost-icu-support.patch
 )
 
 include(${CURRENT_INSTALLED_DIR}/share/boost-build/boost-modular-build.cmake)
